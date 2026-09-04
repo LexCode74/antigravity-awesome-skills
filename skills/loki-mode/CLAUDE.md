@@ -118,3 +118,59 @@ Built on 2025 research from three major AI labs:
 - NVIDIA ToolOrchestra (efficiency metrics)
 
 See `references/openai-patterns.md`, `references/lab-research-patterns.md`, and `references/advanced-patterns.md`.
+
+
+---
+
+## Directiva Norte y Anti-Alucinación (innegociable — agregada 2026-05-03)
+
+### Filtro Norte — toda decisión pasa por aquí
+
+Antes de implementar / recomendar / gastar / publicar, pasar por el filtro:
+
+1. ¿Colma un **ANHELO** de Manuel o de los buyer-personas de este subproyecto?
+2. ¿Resuelve un **MIEDO** de Manuel o de los BPs?
+3. ¿Previene un **MOMENTO DE ABANDONO** de los BPs?
+
+Si las 3 son NO → cuestionar severamente, postergar o descartar.
+
+**BPs específicos del subproyecto:** documentar en la sección `Buyer Personas` de este CLAUDE.md. Si está vacía, heredar BP1 (Ingeniero Curioso 35-50) + BP2 (Joven Técnico 24-34) del `Antigravity-Proyectos/CLAUDE.md` global.
+
+### Anti-alucinación — consulta NotebookLM en decisiones críticas
+
+**Antes de ejecutar/recomendar cualquier cosa que implique:**
+
+- 💸 **Gasto de dinero** (ads, herramientas IA, infra, contratación, compra de assets)
+- 🔒 **Seguridad informática** (auth, secrets, RLS, headers, vulnerabilidades) o **de usuarios** (datos personales, GDPR, Hotmart compliance)
+- ⏰ **Gasto de tiempo significativo** (>2h, decisiones arquitectónicas, refactors grandes)
+- 🎯 **Eficacia / efectividad de solución** (afirmaciones tipo "esto convierte mejor", "esto es la best practice", "esto es viral")
+
+→ **Consultar primero NotebookLM:**
+
+```bash
+/home/lexcode74/miniforge3/envs/notebooklm/bin/python \
+  /home/lexcode74/Antigravity-Proyectos/notebooklm-skill/scripts/nlm.py \
+  ask --notebook-id <ID-relevante> "pregunta específica"
+```
+
+**Notebooks principales (validar IDs con `nlm.py list`):**
+
+| Tema | Notebook ID | Cubierto por skill (SÍ/NO) |
+|------|-------------|----------------------------|
+| Meta Ads, hyperoptimización campañas | `ee60c6bf-3037-4a06-96f5-e063019cfba1` | ✅ `growth-marketing-meta` con NOTEBOOKLM-ALWAYS |
+| Videos virales — estrategia y benchmarks | `7869ed80-3346-4103-b5a8-98f17a947ac8` | ⚠️ skill `seedance` cubre técnica, NO viralidad |
+| Email marketing info-products técnicos | `6e7a2ccd-29bc-45b6-94d7-3964d27fe67f` | ⚠️ skill `email-marketing-omnisend` cubre edición, NO copy/deliverability strategy |
+| Campañas Automatizadas multi-canal | `ee60c6bf-3037-4a06-96f5-e063019cfba1` | ✅ `growth-marketing-meta` |
+| Videos virales largos 10min | `0d61fa52-f35c-4437-a050-3ab1c187516f` | — |
+| Agente Contenido Arquitectura | `2a5d8852-d5eb-4661-85f6-e0d5e8c5855e` | — |
+| AI Social media automation | `ad5aca05-c6c5-4cef-b955-307c0788cce7` | — |
+
+Si el tema no tiene notebook dedicado → declarar explícitamente *"inferencia no verificada"* antes de proceder.
+
+**Razón (cita Manuel 2026-04-26):** *"A mí me interesa que cumplamos los pinches objetivos, no tener la razón. Las cosas que digo pueden llegar a tener errores, así que siempre antes de implementar debes consultar NotebookLM."*
+
+---
+
+## 🛑 DIRECTIVA NO-INVENTAR INFRAESTRUCTURA (canon · 2026-05-24 · hereda del raíz)
+
+> Antes de afirmar nada sobre DNS · hosting · registrador · proveedor · plan contratado · CDN · capacidades de Vercel/Hotmart/Meta/Supabase/etc. de Manuel: verificar con comando reproducible (`getent hosts`, `curl`, `gh`, WebFetch a docs vivos, NotebookLM) o preguntar UNA línea concreta. NUNCA escribir "tu hosting" · "tu DNS" · "tu proveedor" como si supieras cuál es. Reportar verificación con output literal, no paráfrasis. Detalle completo + anti-patrón en `~/Antigravity-Proyectos/CLAUDE.md` § Directiva Global No-Inventar Infraestructura.
